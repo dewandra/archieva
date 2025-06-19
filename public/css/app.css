@@ -1,0 +1,77 @@
+/* resources/css/app.css */
+@import url('[https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap)');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FA; /* Warna latar utama body */
+    color: #333;
+}
+
+.page-wrapper {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* === Sidebar Styling === */
+.sidebar {
+    width: 280px;
+    background-color: #123654; /* Warna dark blue sidebar */
+    color: #fff;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1rem;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+}
+
+.sidebar-header {
+    margin-bottom: 1rem;
+}
+
+.sidebar-brand {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.sidebar-brand img {
+    max-height: 40px;
+}
+
+.sidebar-nav .nav-item {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    color: #adb5bd; /* Warna teks link tidak aktif */
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+.sidebar-nav .nav-link i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    width: 20px; /* Jaga lebar ikon konsisten */
+    text-align: center;
+}
+
+.sidebar-nav .nav-link:hover {
+    background-color: #2A4C67; /* Warna hover */
+    color: #fff;
+}
+
+.sidebar .sidebar-nav .nav-link.active {
+    background-color: #2A4C67 !important; /* Warna yang Anda inginkan */
+    color: #fff !important; /* Ganti ke putih agar kontras */
+    font-weight: 500;
+}
+
