@@ -17,11 +17,12 @@
 
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-bottom-0 py-3">
-             <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-between align-items-center">
                 <div class="col-md-4">
                     <div class="input-group">
                         <span class="input-group-text bg-white border-end-0"><i class="bi bi-search"></i></span>
-                        <input type="search" wire:model.live.debounce.300ms="search" class="form-control border-start-0" placeholder="Cari perihal atau nomor surat...">
+                        <input type="search" wire:model.live.debounce.300ms="search"
+                            class="form-control border-start-0" placeholder="Cari perihal atau nomor surat...">
                     </div>
                 </div>
                 <div class="btn-group">
@@ -54,24 +55,28 @@
                                 <div class="text-muted small">Diterima: 08/06/2025</div>
                             </td>
                             <td>
-                                <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Sangat Penting</span>
+                                <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Sangat
+                                    Penting</span>
                             </td>
                             <td class="text-end">
-                                <button class="btn btn-light btn-sm" title="Edit" wire:click="edit({{-- $surat->id --}})">
+                                <button class="btn btn-light btn-sm" title="Edit"
+                                    wire:click="edit({{-- $surat->id --}})">
                                     <i class="bi bi-pencil-square"></i>
                                 </button>
-                                <button class="btn btn-light btn-sm" title="Detail" data-bs-toggle="modal" data-bs-target="#detailSuratModal" wire:click="showDetail({{-- $surat->id --}})">
+                                <button class="btn btn-light btn-sm" title="Detail" data-bs-toggle="modal"
+                                    data-bs-target="#detailSuratModal" wire:click="showDetail({{-- $surat->id --}})">
                                     <i class="bi bi-eye-fill"></i>
                                 </button>
-                                <button class="btn btn-light btn-sm text-danger" title="Hapus" wire:click="confirmDelete({{-- $surat->id --}})">
+                                <button class="btn btn-light btn-sm text-danger" title="Hapus"
+                                    wire:click="confirmDelete({{-- $surat->id --}})">
                                     <i class="bi bi-trash3-fill"></i>
                                 </button>
                             </td>
                         </tr>
                         <tr>
-                             <td>
+                            <td>
                                 <div class="d-flex align-items-center">
-                                     <div class="icon-circle bg-success-subtle text-success-emphasis me-3">
+                                    <div class="icon-circle bg-success-subtle text-success-emphasis me-3">
                                         <i class="bi bi-envelope-paper-fill"></i>
                                     </div>
                                     <div>
@@ -87,10 +92,13 @@
                             <td>
                                 <span class="badge bg-primary-subtle text-primary-emphasis rounded-pill">Biasa</span>
                             </td>
-                             <td class="text-end">
-                                <button class="btn btn-light btn-sm" title="Edit"><i class="bi bi-pencil-square"></i></button>
-                                <button class="btn btn-light btn-sm" title="Detail" data-bs-toggle="modal" data-bs-target="#detailSuratModal"><i class="bi bi-eye-fill"></i></button>
-                                <button class="btn btn-light btn-sm text-danger" title="Hapus"><i class="bi bi-trash3-fill"></i></button>
+                            <td class="text-end">
+                                <button class="btn btn-light btn-sm" title="Edit"><i
+                                        class="bi bi-pencil-square"></i></button>
+                                <button class="btn btn-light btn-sm" title="Detail" data-bs-toggle="modal"
+                                    data-bs-target="#detailSuratModal"><i class="bi bi-eye-fill"></i></button>
+                                <button class="btn btn-light btn-sm text-danger" title="Hapus"><i
+                                        class="bi bi-trash3-fill"></i></button>
                             </td>
                         </tr>
                     </tbody>
@@ -106,12 +114,14 @@
     {{-- =================================================================
     BAGIAN 2: MODAL UNTUK TAMBAH DATA SURAT - REDESIGNED
     ================================================================== --}}
-    <div wire:ignore.self class="modal fade" id="tambahSuratModal" tabindex="-1" aria-labelledby="tambahSuratModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="tambahSuratModal" tabindex="-1"
+        aria-labelledby="tambahSuratModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0">
                 <div class="modal-header bg-my-primary text-white">
                     <h5 class="modal-title" id="tambahSuratModalLabel">Formulir Surat Masuk Baru</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form wire:submit.prevent="save">
@@ -121,31 +131,36 @@
                         <div class="row">
                             <div class="col-md-6 mb-3">
                                 <label for="nomorSurat" class="form-label">Nomor Surat</label>
-                                <input type="text" class="form-control" id="nomorSurat" wire:model="nomorSurat" placeholder="Contoh: 123/ABC/VI/2025">
+                                <input type="text" class="form-control" id="nomorSurat" wire:model="nomorSurat"
+                                    placeholder="Contoh: 123/ABC/VI/2025">
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="pengirim" class="form-label">Pengirim</label>
-                                <input type="text" class="form-control" id="pengirim" wire:model="pengirim" placeholder="Nama instansi/perorangan">
+                                <input type="text" class="form-control" id="pengirim" wire:model="pengirim"
+                                    placeholder="Nama instansi/perorangan">
                             </div>
-                             <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="tanggalSurat" class="form-label">Tanggal Surat</label>
-                                <input type="date" class="form-control" id="tanggalSurat" wire:model="tanggalSurat">
+                                <input type="date" class="form-control" id="tanggalSurat"
+                                    wire:model="tanggalSurat">
                             </div>
-                             <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="tanggalDiterima" class="form-label">Tanggal Diterima</label>
-                                <input type="date" class="form-control" id="tanggalDiterima" wire:model="tanggalDiterima">
+                                <input type="date" class="form-control" id="tanggalDiterima"
+                                    wire:model="tanggalDiterima">
                             </div>
                         </div>
 
                         {{-- DETAIL SURAT --}}
                         <h6 class="text-muted mt-3">Detail Surat</h6>
                         <hr class="mt-2">
-                         <div class="row">
+                        <div class="row">
                             <div class="col-12 mb-3">
                                 <label for="perihal" class="form-label">Perihal</label>
-                                <textarea class="form-control" id="perihal" rows="2" wire:model="perihal" placeholder="Subjek atau inti dari surat"></textarea>
+                                <textarea class="form-control" id="perihal" rows="2" wire:model="perihal"
+                                    placeholder="Subjek atau inti dari surat"></textarea>
                             </div>
-                             <div class="col-md-6 mb-3">
+                            <div class="col-md-6 mb-3">
                                 <label for="sifat" class="form-label">Sifat Surat</label>
                                 <select class="form-select" id="sifat" wire:model="sifat">
                                     <option selected>Pilih sifat surat...</option>
@@ -159,35 +174,80 @@
                                 <label for="fileSurat" class="form-label">Lampiran File (PDF, DOC, JPG)</label>
                                 <input class="form-control" type="file" id="fileSurat" wire:model="fileSurat">
                             </div>
-                         </div>
-                        
-                        {{-- DISPOSISI --}}
-                         <h6 class="text-muted mt-3">Disposisi Awal</h6>
-                         <hr class="mt-2">
-                         <div class="row">
-                            <div class="col-md-6 mb-3">
-                                <label class="form-label">Ditujukan Ke</label>
-                                <div class="p-3 border rounded">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="ditujukanKe" id="tu" value="TU" wire:model="ditujukanKe">
-                                        <label class="form-check-label" for="tu">TU</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="ditujukanKe" id="keuangan" value="Keuangan" wire:model="ditujukanKe">
-                                        <label class="form-check-label" for="keuangan">Keuangan</label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="ditujukanKe" id="pemerintahan" value="Pemerintahan" wire:model="ditujukanKe">
-                                        <label class="form-check-label" for="pemerintahan">Pemerintahan</label>
-                                    </div>
+                        </div>
+
+                         {{-- DISPOSISI --}}
+                    <h6 class="text-muted mt-3">Disposisi Awal</h6>
+                    <hr class="mt-2">
+                    <div class="row">
+                        {{-- BAGIAN DITUJUKAN KE (MULTI-PILIHAN) --}}
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Ditujukan Ke</label>
+                            <div class="p-3 border rounded" style="max-height: 200px; overflow-y: auto;">
+                                {{-- DAFTAR CHECKBOX --}}
+                                <div class="form-check">
+                                    {{-- UBAH: type="radio" menjadi "checkbox" --}}
+                                    <input class="form-check-input" type="checkbox" value="TU" id="dest_tu" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_tu">TU</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Penyusunan Program" id="dest_program" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_program">Penyusunan Program</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Keuangan" id="dest_keuangan" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_keuangan">Keuangan</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Pembangunan Ekonomi" id="dest_pembangunan" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_pembangunan">Pembangunan Ekonomi</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Kemasyarakatan" id="dest_kemasyarakatan" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_kemasyarakatan">Kemasyarakatan</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Sarana Prasarana" id="dest_sarana" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_sarana">Sarana Prasarana</o>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="Semua Bidang" id="dest_semua" wire:model="ditujukanKe">
+                                    <label class="form-check-label" for="dest_semua">Semua Bidang</label>
                                 </div>
                             </div>
-                         </div>
+                        </div>
+
+                        {{-- BARU: BAGIAN POSISI SURAT (PILIHAN TUNGGAL) --}}
+                        <div class="col-md-6 mb-3">
+                            <label class="form-label">Posisi Surat</label>
+                            <div class="p-3 border rounded">
+                                {{-- DAFTAR RADIO BUTTON --}}
+                                <div class="form-check">
+                                    {{-- INFO: type="radio" dan wire:model yang sama untuk satu pilihan --}}
+                                    <input class="form-check-input" type="radio" name="posisiSuratGroup" value="AE" id="pos_ae" wire:model="posisiSurat">
+                                    <label class="form-check-label" for="pos_ae">AE</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="posisiSuratGroup" value="OTU" id="pos_otu" wire:model="posisiSurat">
+                                    <label class="form-check-label" for="pos_otu">OTU</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="posisiSuratGroup" value="SEKBN" id="pos_sekbn" wire:model="posisiSurat">
+                                    <label class="form-check-label" for="pos_sekbn">SEKBN</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="posisiSuratGroup" value="KABAN" id="pos_kaban" wire:model="posisiSurat">
+                                    <label class="form-check-label" for="pos_kaban">KABAN</label>
+                                </div>
+                            </div>
+                        </div>
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-light" data-bs-dismiss="modal">Batal</button>
-                    <button type="button" class="btn btn-primary" wire:click="save"><i class="bi bi-check-circle me-1"></i> Simpan</button>
+                    <button type="button" class="btn btn-primary" wire:click="save"><i
+                            class="bi bi-check-circle me-1"></i> Simpan</button>
                 </div>
             </div>
         </div>
@@ -196,7 +256,8 @@
     {{-- =================================================================
     BAGIAN 3: MODAL UNTUK DETAIL SURAT - REDESIGNED
     ================================================================== --}}
-    <div wire:ignore.self class="modal fade" id="detailSuratModal" tabindex="-1" aria-labelledby="detailSuratModalLabel" aria-hidden="true">
+    <div wire:ignore.self class="modal fade" id="detailSuratModal" tabindex="-1"
+        aria-labelledby="detailSuratModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content border-0">
                 <div class="modal-header bg-light border-bottom">
@@ -218,7 +279,7 @@
                                     <td width="150px"><i class="bi bi-person-fill me-2 text-muted"></i> Pengirim</td>
                                     <td>: PT B</td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td><i class="bi bi-calendar-event-fill me-2 text-muted"></i> Tgl. Surat</td>
                                     <td>: 16 April 1986</td>
                                 </tr>
@@ -226,9 +287,10 @@
                                     <td><i class="bi bi-calendar-check-fill me-2 text-muted"></i> Tgl. Diterima</td>
                                     <td>: 26 Agustus 1993</td>
                                 </tr>
-                                 <tr>
+                                <tr>
                                     <td><i class="bi bi-shield-lock-fill me-2 text-muted"></i> Sifat</td>
-                                    <td>: <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Sangat Penting</span></td>
+                                    <td>: <span class="badge bg-danger-subtle text-danger-emphasis rounded-pill">Sangat
+                                            Penting</span></td>
                                 </tr>
                             </table>
                         </div>
@@ -243,14 +305,15 @@
                             </div>
                         </div>
                     </div>
-                     <hr>
-                     <h6 class="text-primary">DISPOSISI</h6>
-                     <p>Surat ini telah didisposisikan ke bagian: <strong>Pemerintahan</strong>.</p>
+                    <hr>
+                    <h6 class="text-primary">DISPOSISI</h6>
+                    <p>Surat ini telah didisposisikan ke bagian: <strong>Pemerintahan</strong>.</p>
 
                 </div>
                 <div class="modal-footer bg-light">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
-                    <button type="button" class="btn btn-primary"><i class="bi bi-printer me-1"></i> Cetak Lembar Disposisi</button>
+                    <button type="button" class="btn btn-primary"><i class="bi bi-printer me-1"></i> Cetak Lembar
+                        Disposisi</button>
                 </div>
             </div>
         </div>
@@ -259,17 +322,18 @@
 
 {{-- Tambahkan sedikit style untuk icon circle --}}
 @push('styles')
-<style>
-    .icon-circle {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-    }
-    .icon-circle .bi {
-        font-size: 1.2rem;
-    }
-</style>
+    <style>
+        .icon-circle {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
+
+        .icon-circle .bi {
+            font-size: 1.2rem;
+        }
+    </style>
 @endpush
