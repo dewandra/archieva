@@ -1,77 +1,67 @@
 /* resources/css/app.css */
-@import url('[https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap)');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #F8F9FA; /* Warna latar utama body */
+    background-color: #F8F9FA;
     color: #333;
 }
 
-.page-wrapper {
-    display: flex;
-    min-height: 100vh;
-}
-
-/* === Sidebar Styling === */
-.sidebar {
+/* === Sidebar Styling KHUSUS untuk DESKTOP === */
+.sidebar-desktop {
     width: 280px;
-    background-color: #123654; /* Warna dark blue sidebar */
+    background-color: #123654;
     color: #fff;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    padding: 1.5rem 1rem;
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     height: 100vh;
+    z-index: 1040;
+    overflow-y: auto;
 }
 
-.sidebar-header {
-    margin-bottom: 1rem;
+/* Mendorong konten ke kanan HANYA di layar desktop */
+@media (min-width: 992px) {
+    .main-content-wrapper {
+        margin-left: 280px;
+    }
 }
 
-.sidebar-brand {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    color: #fff;
-    font-size: 1.2rem;
-    font-weight: 600;
-}
-
-.sidebar-brand img {
+.sidebar-header .sidebar-brand img {
     max-height: 40px;
-}
-
-.sidebar-nav .nav-item {
-    margin-bottom: 0.5rem;
 }
 
 .sidebar-nav .nav-link {
     display: flex;
     align-items: center;
-    color: #adb5bd; /* Warna teks link tidak aktif */
+    color: #adb5bd;
     padding: 0.8rem 1rem;
     border-radius: 0.5rem;
     text-decoration: none;
-    transition: all 0.2s ease-in-out;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    margin-bottom: 0.25rem;
 }
 
 .sidebar-nav .nav-link i {
     font-size: 1.2rem;
     margin-right: 1rem;
-    width: 20px; /* Jaga lebar ikon konsisten */
+    width: 20px;
     text-align: center;
 }
 
 .sidebar-nav .nav-link:hover {
-    background-color: #2A4C67; /* Warna hover */
+    background-color: #2A4C67;
     color: #fff;
 }
 
-.sidebar .sidebar-nav .nav-link.active {
-    background-color: #2A4C67 !important; /* Warna yang Anda inginkan */
-    color: #fff !important; /* Ganti ke putih agar kontras */
+.sidebar-nav .nav-link.active {
+    background-color: #2A4C67 !important;
+    color: #fff !important;
     font-weight: 500;
 }
 
+.sidebar-divider {
+    margin: 1rem 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}

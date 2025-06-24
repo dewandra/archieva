@@ -10,7 +10,7 @@
     </div>
     {{-- ===== cards ===== --}}
     <div class="row mb-4">
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="card text-white bg-my-primary shadow">
                 <div class="card-body">
                     <h5 class="card-title">Surat Masuk</h5>
@@ -19,7 +19,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="card text-white bg-my-danger shadow">
                 <div class="card-body">
                     <h5 class="card-title">Surat Keluar</h5>
@@ -28,7 +28,7 @@
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-12 col-md-4 mb-3 mb-md-0">
             <div class="card text-my-primary bg-my-info shadow">
                 <div class="card-body">
                     <h5 class="card-title">Request Surat</h5>
