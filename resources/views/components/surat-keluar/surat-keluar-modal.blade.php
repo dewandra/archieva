@@ -17,7 +17,7 @@
                             @error('tanggal') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
                         <div class="mb-3">
-                            <label for="nomor_surat" class="form-label">Nomor Urut</label>
+                            <label for="nomor_surat" class="form-label">Nomor</label>
                             <input type="number" class="form-control @error('nomor_surat') is-invalid @enderror" id="nomor_surat" wire:model.lazy="nomor_surat" placeholder="Contoh: 1, 39, 79...">
                              @error('nomor_surat') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
