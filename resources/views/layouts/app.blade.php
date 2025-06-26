@@ -47,13 +47,18 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <span class="navbar-brand h1 mb-0">{{ $title ?? 'Archieva' }}</span>
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-                    <button type="submit" class="btn btn-outline-danger d-flex align-items-center" title="Logout">
-                        <i class="bi bi-box-arrow-right"></i>
-                        <span class="d-none d-sm-inline ms-2">Logout</span>
-                    </button>
-                </form>
+                <div class="d-flex align-items-center">
+                    <div class="me-3">
+                        @livewire('notification-indicator')
+                    </div>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="btn btn-outline-danger d-flex align-items-center" title="Logout">
+                            <i class="bi bi-box-arrow-right"></i>
+                            <span class="d-none d-sm-inline ms-2">Logout</span>
+                        </button>
+                    </form>
+                </div>
             </div>
         </nav>
         <main class="p-3 p-md-4">
