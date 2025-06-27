@@ -2,6 +2,7 @@
 
 namespace App\Livewire\RequestSurat;
 
+use App\Models\LogSurat;
 use App\Models\RequestSurat;
 use App\Models\User;
 use App\Notifications\NewRequestSurat;
@@ -87,6 +88,17 @@ use WithFileUploads, WithPagination;
             'tanggal_disetujui' => $this->tanggal_disetujui,
             'approved_by_user_id' => Auth::id(),
         ]);
+
+        // Simpan log surat
+        LogSurat::create([
+            'request_surat_id' => $this->selectedRequest->id,
+            'user_id' => Auth::id(), // Petugas yang menyetujui
+            'nomor_surat' => $this->nomor_surat_baru,
+            'tanggal_arsip' => now(), // Tanggal saat ini
+            'bidang' => $this->selectedRequest->bidang,
+        ]);
+        // ===
+
         $requester = $this->selectedRequest->user;
         if ($requester) $requester->notify(new RequestApproved($this->selectedRequest));
         $this->dispatch('swal:success', message: 'Request berhasil disetujui.');
