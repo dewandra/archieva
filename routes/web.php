@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PrintController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -11,6 +12,7 @@ Route::middleware('auth')->group(function () {
     // Rute yang bisa diakses SEMUA role (0, 1, 2)
     Route::get('/request-surat', \App\Livewire\RequestSurat\Index::class)->name('request-surat');
     Route::get('/profile', \App\Livewire\Profile\EditProfile::class)->name('profile');
+    Route::get('/print/log-surat/{date}', [PrintController::class, 'printLogSurat'])->name('print.log-surat');
 
 
     // Rute yang hanya bisa diakses oleh ADMIN (0) dan ARSIP (1)
