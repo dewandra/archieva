@@ -13,6 +13,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/request-surat', \App\Livewire\RequestSurat\Index::class)->name('request-surat');
     Route::get('/profile', \App\Livewire\Profile\EditProfile::class)->name('profile');
     Route::get('/print/log-surat/{date}', [PrintController::class, 'printLogSurat'])->name('print.log-surat');
+        Route::get('/print/disposisi/{surat}/{nomorAgenda}', [PrintController::class, 'printDisposisi'])->name('print.disposisi');
+
 
 
     // Rute yang hanya bisa diakses oleh ADMIN (0) dan ARSIP (1)

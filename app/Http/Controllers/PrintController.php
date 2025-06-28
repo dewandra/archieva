@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LogSurat;
+use App\Models\SuratMasuk;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 
@@ -25,6 +26,19 @@ class PrintController extends Controller
             'logs' => $logs,
             'selectedDate' => $selectedDate,
             'title' => $title,
+        ]);
+    }
+
+    public function printDisposisi(SuratMasuk $surat, $nomorAgenda)
+    {
+        // Judul halaman cetak
+        $title = 'Disposisi - ' . $surat->nomor_surat;
+
+        // Mengirim data ke view 'prints.disposisi'
+        return view('prints.disposisi', [
+            'surat' => $surat,
+            'title' => $title,
+            'nomorAgenda' => $nomorAgenda,
         ]);
     }
 }
