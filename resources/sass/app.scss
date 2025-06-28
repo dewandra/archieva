@@ -25,3 +25,44 @@
 .bg-my-info{
     background: #d6dde2 !important;
 }
+
+// Variabel warna baru untuk aksen
+$teal: #20c997;
+$indigo: #6610f2;
+
+// Membuat card utama terlihat lebih bersih
+.card {
+    border: none; // Menghilangkan border standar
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important; // Shadow lebih halus
+}
+
+// Style untuk card statistik yang baru
+.stat-card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.75rem;
+}
+
+// Style untuk daftar surat yang lebih menarik
+.letter-list .list-group-item {
+    transition: background-color 0.2s ease-in-out;
+    padding: 1rem 1.25rem !important;
+}
+
+.letter-list .list-group-item:hover {
+    background-color: #f8f9fa; // Warna hover yang lembut
+}
+
+.letter-list .item-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
