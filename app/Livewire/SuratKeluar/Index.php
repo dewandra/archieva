@@ -4,47 +4,135 @@ namespace App\Livewire\SuratKeluar;
 
 use App\Models\SuratKeluar;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Title;
 use Livewire\Component;
-use Livewire\WithPagination;
 
 #[Title('Surat Keluar')]
 class Index extends Component
 {
+    // WithPagination dihapus karena paginasi ditangani secara manual.
 
-    use WithPagination;
+    //================================================
+    // SECTION: Properti Komponen
+    //================================================
 
-    public $suratId, $tanggal, $nomor_surat, $klasifikasi;
+    public $suratId;
+    public $tanggal;
+    public $nomor_surat;
+    public $klasifikasi;
     public $isEditMode = false;
-    protected $paginationTheme = 'bootstrap';
+
+    // Properti untuk filter dan pencarian
+    public $filterTahun = '';
+    public $filterBulan = '';
+    public $search = '';
+
+    // Properti untuk paginasi manual
+    public $page = 1;
+    public $perPage = 3; // Menampilkan 3 tanggal per halaman
+    public $totalDates = 0;
+
+
+    //================================================
+    // SECTION: Metode Paginasi Manual
+    //================================================
+    
+    public function nextPage()
+    {
+        // Hanya menambah halaman jika halaman saat ini bukan halaman terakhir
+        if ($this->page < ceil($this->totalDates / $this->perPage)) {
+            $this->page++;
+        }
+    }
+
+    public function previousPage()
+    {
+        // Hanya mengurangi halaman jika bukan halaman pertama
+        if ($this->page > 1) {
+            $this->page--;
+        }
+    }
+
+    public function goToPage($page)
+    {
+        $this->page = $page;
+    }
+
+    //================================================
+    // SECTION: Lifecycle Hooks
+    //================================================
+
+    public function updated($propertyName): void
+    {
+        // Me-reset ke halaman 1 setiap kali filter atau pencarian diubah
+        if (in_array($propertyName, ['filterTahun', 'filterBulan', 'search'])) {
+            $this->page = 1;
+        }
+    }
+
+    //================================================
+    // SECTION: Metode Render
+    //================================================
 
     public function render()
     {
-        // Ambil 3 tanggal unik terbaru, lalu paginasi
-        $distinctDates = SuratKeluar::select('tanggal')
-            ->distinct()
-            ->orderBy('tanggal', 'asc')
-            ->paginate(3);
+        // Mengambil daftar tahun unik untuk opsi filter.
+        $availableYears = SuratKeluar::select(DB::raw('YEAR(tanggal) as year'))
+            ->distinct()->orderBy('year', 'desc')->pluck('year');
 
-        // Ambil semua item surat yang tanggalnya ada di halaman paginasi saat ini
-        // Eager load relasi 'user' untuk efisiensi query
-        $suratItems = SuratKeluar::with('user')
-            ->whereIn('tanggal', $distinctDates->pluck('tanggal'))
-            ->orderBy('nomor_surat', 'asc')
-            ->get();
+        // Memulai query builder dasar.
+        $query = SuratKeluar::query();
 
-        // Kelompokkan data berdasarkan tanggal untuk membuat struktur grid
-        $groupedSurat = $suratItems->groupBy(fn ($item) => $item->tanggal->format('Y-m-d'));
+        // Menerapkan filter sebelum kalkulasi paginasi.
+        if ($this->filterTahun) $query->whereYear('tanggal', $this->filterTahun);
+        if ($this->filterBulan) $query->whereMonth('tanggal', $this->filterBulan);
+        if ($this->search) {
+            $query->where(function ($subQuery) {
+                $subQuery->where('nomor_surat', 'like', '%' . $this->search . '%')
+                         ->orWhere('klasifikasi', 'like', '%' . $this->search . '%');
+            });
+        }
+        
+        // 1. Ambil semua tanggal unik yang sesuai dengan filter untuk dihitung.
+        $allDistinctDates = $query->select('tanggal')->distinct()->orderBy('tanggal', 'asc')->pluck('tanggal');
+        
+        // 2. Hitung total tanggal unik untuk paginasi.
+        $this->totalDates = $allDistinctDates->count();
+        
+        // 3. Ambil "potongan" tanggal (slice) untuk halaman saat ini.
+        $datesForCurrentPage = $allDistinctDates->slice(($this->page - 1) * $this->perPage, $this->perPage);
 
-        return view('livewire.surat-keluar.index',[
-            'groupedSurat' => $groupedSurat,
-            'paginatedLinks' => $distinctDates,
+        $suratItems = collect();
+        if ($datesForCurrentPage->isNotEmpty()) {
+            $suratItems = SuratKeluar::with('user')
+                ->whereIn('tanggal', $datesForCurrentPage)
+                ->when($this->search, function ($subQuery) {
+                    $subQuery->where(function ($q) {
+                        $q->where('nomor_surat', 'like', '%' . $this->search . '%')
+                          ->orWhere('klasifikasi', 'like', '%' . $this->search . '%');
+                    });
+                })
+                ->orderBy('tanggal', 'asc')
+                // FIX: Paksa pengurutan 'nomor_surat' (string) sebagai angka (integer).
+                ->orderByRaw('CAST(nomor_surat AS UNSIGNED) asc')
+                ->get();
+        }
+
+        $groupedSurat = $suratItems->groupBy(fn ($item) => $item->tanggal->format('Y-m-d'))->sortKeys();
+
+        return view('livewire.surat-keluar.index', [
+            'groupedSurat'   => $groupedSurat,
+            'availableYears' => $availableYears,
         ]);
     }
 
-        // Menampilkan modal untuk membuat data baru
-    public function showCreateModal()
+    //================================================
+    // SECTION: Aksi Modal
+    //================================================
+    
+    public function showCreateModal(): void
     {
         $this->resetForm();
         $this->isEditMode = false;
@@ -52,8 +140,7 @@ class Index extends Component
         $this->dispatch('open-modal', name: 'surat-keluar-modal');
     }
 
-    // Menampilkan modal untuk mengedit data
-    public function showEditModal($id)
+    public function showEditModal(int $id): void
     {
         $surat = SuratKeluar::findOrFail($id);
         $this->suratId = $surat->id;
@@ -64,49 +151,63 @@ class Index extends Component
         $this->dispatch('open-modal', name: 'surat-keluar-modal');
     }
 
-    // Menyimpan data (Create & Update)
-    public function save()
+    //================================================
+    // SECTION: Operasi CRUD
+    //================================================
+
+    public function save(): void
     {
         $rules = [
-            'tanggal' => 'required|date',
-            'nomor_surat' => 'required|numeric|min:0|max:100',
+            'tanggal'     => 'required|date',
+            'nomor_surat' => 'required|numeric|min:1|max:100',
             'klasifikasi' => 'required|string|max:255',
         ];
-
         $rules['nomor_surat'] .= '|unique:surat_keluars,nomor_surat,' . $this->suratId . ',id,tanggal,' . $this->tanggal;
-
-        $this->validate($rules);
-
+        $messages = [
+            'tanggal.required'       => 'Kolom tanggal wajib diisi.',
+            'nomor_surat.required'   => 'Kolom nomor surat wajib diisi.',
+            'nomor_surat.numeric'    => 'Nomor surat harus berupa angka.',
+            'nomor_surat.min'        => 'Nomor surat tidak boleh kurang dari 1.',
+            'nomor_surat.max'        => 'Nomor surat tidak boleh lebih dari 100.',
+            'nomor_surat.unique'     => 'Nomor surat ini sudah terdaftar pada tanggal yang sama.',
+            'klasifikasi.required'   => 'Kolom klasifikasi wajib diisi.',
+            'klasifikasi.max'        => 'Klasifikasi tidak boleh melebihi 255 karakter.',
+        ];
+        
+        $this->validate($rules, $messages);
+        
         SuratKeluar::updateOrCreate(
             ['id' => $this->suratId],
             [
-                'tanggal' => $this->tanggal,
+                'tanggal'     => $this->tanggal,
                 'nomor_surat' => str_pad($this->nomor_surat, 2, '0', STR_PAD_LEFT),
                 'klasifikasi' => $this->klasifikasi,
-                'user_id' => Auth::id(), // Simpan ID user yang sedang login
+                'user_id'     => Auth::id(),
             ]
         );
 
-        $this->dispatch('swal:success', message: $this->isEditMode ? 'Data berhasil diperbarui.' : 'Data berhasil ditambahkan.');
+        $message = $this->isEditMode ? 'Data berhasil diperbarui.' : 'Data berhasil ditambahkan.';
+        $this->dispatch('swal:success', message: $message);
         $this->dispatch('close-modal', name: 'surat-keluar-modal');
     }
 
-    // Konfirmasi hapus data
-    public function confirmDelete($id)
+    public function confirmDelete(int $id): void
     {
         $this->dispatch('swal:confirm', id: $id, title: 'Anda Yakin?', text: 'Data surat yang dihapus tidak dapat dikembalikan!', confirmButtonText: 'Ya, hapus!', cancelButtonText: 'Batal');
     }
 
-    // Proses hapus data
     #[On('destroy')]
-    public function destroy($id)
+    public function destroy(int $id): void
     {
         SuratKeluar::find($id)->delete();
         $this->dispatch('swal:success', message: 'Data berhasil dihapus.');
     }
 
-    // Reset properti form
-    private function resetForm()
+    //================================================
+    // SECTION: Metode Utilitas
+    //================================================
+    
+    private function resetForm(): void
     {
         $this->reset(['suratId', 'isEditMode', 'tanggal', 'nomor_surat', 'klasifikasi']);
     }
