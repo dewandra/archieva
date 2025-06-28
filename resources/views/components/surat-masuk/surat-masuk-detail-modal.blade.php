@@ -1,4 +1,4 @@
-@props(['surat'])
+@props(['surat', 'nomorAgenda'])
 
 <div wire:ignore.self class="modal fade" id="detailSuratModal" tabindex="-1" aria-labelledby="detailSuratModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -70,6 +70,10 @@
                     <p>Posisi Surat Saat Ini: <strong>{{ $surat->posisi_surat }}</strong></p>
                 </div>
                 <div class="modal-footer bg-light">
+                    {{-- TOMBOL CETAK BARU --}}
+                    <a href="{{ route('print.disposisi', ['surat' => $surat->id, 'nomorAgenda' => $nomorAgenda ]) }}" target="_blank" class="btn btn-success me-auto">
+                        <i class="bi bi-printer-fill me-1"></i> Cetak Disposisi
+                    </a>
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
                 </div>
             @endif
