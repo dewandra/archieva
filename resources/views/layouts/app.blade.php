@@ -9,32 +9,40 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>{{ $title ?? 'Archieva' }}</title>
     @livewireStyles
+
+    {{-- Sedikit style tambahan untuk memastikan footer menempel di bawah jika konten pendek --}}
+    <style>
+        .main-content-wrapper {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        main {
+            flex: 1;
+        }
+    </style>
 </head>
 
 <body>
     {{-- VERSI 1: SIDEBAR KHUSUS UNTUK TAMPILAN DESKTOP --}}
     <div class="sidebar-desktop d-none d-lg-flex flex-column p-3">
-        {{-- Logo untuk Desktop --}}
         <div class="sidebar-header mb-3">
             <a href="{{ route('homepage') }}">
                 <img src="{{ asset('img/archievault3.jpeg') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
             </a>
         </div>
-        {{-- Menu dipanggil setelah logo --}}
         <x-sidebar-menu />
     </div>
 
     {{-- VERSI 2: SIDEBAR KHUSUS UNTUK TAMPILAN MOBILE (Offcanvas) --}}
     <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMobile" aria-labelledby="sidebarMobileLabel" style="background-color: #123654; color: #fff;">
         <div class="offcanvas-header border-bottom border-secondary">
-            {{-- Logo untuk Mobile --}}
             <a href="{{ route('homepage') }}">
                 <img src="{{ asset('img/archievault3.jpeg') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
             </a>
             <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-3">
-            {{-- Menu dipanggil di dalam body --}}
             <x-sidebar-menu />
         </div>
     </div>
@@ -64,6 +72,14 @@
         <main class="p-3 p-md-4">
             {{ $slot }}
         </main>
+
+        <footer class="mt-auto bg-white text-center text-muted py-3 border-top">
+            Copyright &copy; {{ date('Y') }} 
+            {{-- <a href="#" class="text-decoration-none fw-bold">{{ config('app.name', 'Archieva') }}</a>. --}}
+            <a href="#" class="text-decoration-none fw-bold">Dewandra</a>.
+            All Rights Reserved.
+        </footer>
+        
     </div>
 
     @livewireScripts
