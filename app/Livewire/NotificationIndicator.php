@@ -10,23 +10,30 @@ class NotificationIndicator extends Component
     public $unreadCount = 0;
 
     /**
-     * Menggunakan method getListeners() untuk mendefinisikan listener secara dinamis.
-     * Ini memastikan auth()->id() hanya dipanggil saat user sudah login.
-     *
-     * @return array
+     * getListeners digunakan untuk event dari luar, seperti notifikasi real-time.
      */
     public function getListeners(): array
     {
-        // Pastikan user sudah login sebelum membuat channel pribadi
         if (!Auth::check()) {
             return [];
         }
 
         return [
             'notificationRead' => 'updateCount',
-            // Membuat nama channel dinamis setelah user terautentikasi
             'echo-private:App.Models.User.'.Auth::id().',.Illuminate\Notifications\Events\DatabaseNotificationCreated' => 'updateCount',
         ];
+    }
+
+    /**
+     * FUNGSI UTAMA: Dipanggil saat tombol notifikasi diklik.
+     * Menandai semua sebagai dibaca dan langsung mengupdate angka di tampilan.
+     */
+    public function openAndMarkAllAsRead()
+    {
+        if (Auth::check()) {
+            Auth::user()->unreadNotifications->markAsRead();
+            $this->updateCount(); // Perbarui angka setelah ditandai
+        }
     }
 
     public function mount()
@@ -43,7 +50,8 @@ class NotificationIndicator extends Component
 
     public function getUnreadNotificationsProperty()
     {
-        return Auth::check() ? Auth::user()->unreadNotifications()->limit(5)->get() : collect();
+        // Menghapus limit untuk menampilkan semua notifikasi
+        return Auth::check() ? Auth::user()->unreadNotifications : collect();
     }
 
     public function markAsRead($notificationId)

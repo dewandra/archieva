@@ -1,6 +1,3 @@
-{{-- File: resources/views/livewire/surat-keluar/partials/filters.blade.php --}}
-
-{{-- Tampilan Desktop --}}
 <div class="row align-items-center gy-3 d-none d-md-flex">
     <div class="col-md-9 d-flex align-items-center gap-2">
         <span class="text-muted small me-2">Filter:</span>
