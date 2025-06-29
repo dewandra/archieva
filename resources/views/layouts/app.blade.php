@@ -4,13 +4,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>{{ $title ?? 'Archieva' }}</title>
     @livewireStyles
 
-    {{-- Sedikit style tambahan untuk memastikan footer menempel di bawah jika konten pendek --}}
     <style>
         .main-content-wrapper {
             display: flex;
@@ -19,6 +17,13 @@
         }
         main {
             flex: 1;
+        }
+
+        /* PERBAIKAN: Perkecil font footer HANYA di mobile */
+        @media (max-width: 576px) {
+            .page-footer {
+                font-size: 0.8rem; /* Ukuran font diperkecil */
+            }
         }
     </style>
 </head>
@@ -40,7 +45,7 @@
             <a href="{{ route('homepage') }}">
                 <img src="{{ asset('img/archievault3.jpeg') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
             </a>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-3">
             <x-sidebar-menu />
@@ -73,9 +78,9 @@
             {{ $slot }}
         </main>
 
-        <footer class="mt-auto bg-white text-center text-muted py-3 border-top">
+        {{-- PERBAIKAN: Tambahkan kelas 'page-footer' di sini --}}
+        <footer class="page-footer mt-auto bg-white text-center text-muted py-3 border-top">
             Copyright &copy; {{ date('Y') }} 
-            {{-- <a href="#" class="text-decoration-none fw-bold">{{ config('app.name', 'Archieva') }}</a>. --}}
             <a href="#" class="text-decoration-none fw-bold">Dewandra</a>.
             All Rights Reserved.
         </footer>
