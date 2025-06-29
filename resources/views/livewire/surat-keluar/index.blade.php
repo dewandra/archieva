@@ -6,7 +6,7 @@
     <div class="card border-0 shadow-sm">
         <div class="card-header bg-white border-bottom-0 py-3">
             {{-- Tata letak responsif untuk filter dan tombol --}}
-            @include('livewire.surat-keluar.partials.filters')
+            @include('livewire.partials.filters')
         </div>
         <div class="card-body">
             @if($groupedSurat->isNotEmpty())
