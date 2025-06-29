@@ -1,7 +1,6 @@
 <div>
     {{-- ============================================= --}}
     {{-- TOMBOL NOTIFIKASI VERSI DESKTOP (Dropdown)    --}}
-    {{-- Hanya tampil di layar medium ke atas (d-md-block) --}}
     {{-- ============================================= --}}
     <div class="dropdown d-none d-md-block">
         <button wire:poll.15s="updateCount" class="btn btn-outline-secondary position-relative" type="button" data-bs-toggle="dropdown" aria-expanded="false" title="Notifikasi">
@@ -62,7 +61,6 @@
 
     {{-- ============================================= --}}
     {{-- TOMBOL NOTIFIKASI VERSI MOBILE (Offcanvas)    --}}
-    {{-- Hanya tampil di layar kecil (d-md-none)     --}}
     {{-- ============================================= --}}
     <div class="d-md-none">
         <button wire:poll.15s="updateCount" class="btn btn-outline-secondary position-relative" type="button" data-bs-toggle="offcanvas" data-bs-target="#notificationOffcanvas" aria-controls="notificationOffcanvas" title="Notifikasi">
@@ -75,7 +73,6 @@
 
     {{-- ============================================= --}}
     {{-- KONTEN OFFCANVAS MOBILE (Dipanggil dari partial)--}}
-    {{-- Pastikan file partials/notification-mobile.blade.php sudah dibuat --}}
     {{-- ============================================= --}}
     @include('livewire.partials.notification-mobile')
 

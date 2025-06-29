@@ -9,7 +9,6 @@ use Livewire\WithPagination;
 
 class Index extends Component
 {
-    // Gunakan trait WithPagination untuk data log harian
     use WithPagination;
 
     public $selectedDate;

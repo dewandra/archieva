@@ -153,7 +153,6 @@ class Index extends Component
         );
     }
 
-    // GANTI SELURUH METHOD delete($data) YANG LAMA DENGAN INI
     #[On('destroy')]
     public function destroy($id)
     {
