@@ -63,7 +63,7 @@
                     <hr>
                     <h6 class="text-primary">DISPOSISI</h6>
                     <p>Surat ini ditujukan ke bagian: 
-                        @foreach($surat->tujuan_surat as $tujuan)
+                        @foreach((array)$surat->tujuan_surat as $tujuan)
                             <span class="badge bg-secondary me-1">{{ $tujuan }}</span>
                         @endforeach
                     </p>

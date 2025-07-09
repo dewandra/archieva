@@ -13,11 +13,30 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
+// 1. Buat User Admin (role 0)
         User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Admin User',
+            'email' => 'admin@example.com',
+            'role' => 0,
+        ]);
+
+        // 2. Buat User Arsip (role 1)
+        User::factory()->create([
+            'name' => 'Arsip User',
+            'email' => 'arsip@example.com',
+            'role' => 1,
+        ]);
+
+        // 3. Buat User Bidang (role 2)
+        User::factory()->create([
+            'name' => 'Bidang User',
+            'email' => 'bidang@example.com',
+            'role' => 2,
+        ]);
+        
+        // Membuat 5 user bidang tambahan sebagai data dummy
+        User::factory(5)->create([
+            'role' => 2,
         ]);
 
         $this-> call([
