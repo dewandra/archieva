@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="{{ asset('img/Lambang-UM.png') }}" type="image/png">
 
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     <title>{{ $title ?? 'Archieva' }}</title>
@@ -22,7 +23,7 @@
         /* PERBAIKAN: Perkecil font footer HANYA di mobile */
         @media (max-width: 576px) {
             .page-footer {
-                font-size: 0.8rem; /* Ukuran font diperkecil */
+                font-size: 0.8rem;
             }
         }
     </style>
@@ -31,21 +32,25 @@
 <body>
     {{-- VERSI 1: SIDEBAR KHUSUS UNTUK TAMPILAN DESKTOP --}}
     <div class="sidebar-desktop d-none d-lg-flex flex-column p-3">
+        <img src="{{ asset('img/Lambang-UM.png') }}" class="sidebar-watermark-bg" alt="Logo UM Watermark">
+        
         <div class="sidebar-header mb-3">
             <a href="{{ route('homepage') }}">
-                <img src="{{ asset('img/archievault3.jpeg') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
+                <img src="{{ asset('img/archievault3.png') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
             </a>
         </div>
         <x-sidebar-menu />
     </div>
 
     {{-- VERSI 2: SIDEBAR KHUSUS UNTUK TAMPILAN MOBILE (Offcanvas) --}}
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebarMobile" aria-labelledby="sidebarMobileLabel" style="background-color: #123654; color: #fff;">
+    <div class="offcanvas offcanvas-start sidebar-mobile" tabindex="-1" id="sidebarMobile" aria-labelledby="sidebarMobileLabel">
+        <img src="{{ asset('img/Lambang-UM.png') }}" class="sidebar-watermark-bg" alt="Logo UM Watermark">
+        
         <div class="offcanvas-header border-bottom border-secondary">
             <a href="{{ route('homepage') }}">
                 <img src="{{ asset('img/archievault3.jpeg') }}" class="img-fluid" style="max-width: 200px;" alt="Archievault Logo">
             </a>
-            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body d-flex flex-column p-3">
             <x-sidebar-menu />
@@ -78,13 +83,11 @@
             {{ $slot }}
         </main>
 
-        {{-- PERBAIKAN: Tambahkan kelas 'page-footer' di sini --}}
         <footer class="page-footer mt-auto bg-white text-center text-muted py-3 border-top">
             Copyright &copy; {{ date('Y') }} 
-            <a href="#" class="text-decoration-none fw-bold">Dewandra</a>.
+            <a href="#" class="text-decoration-none fw-bold">Veronica Gizella Dewarani</a>.
             All Rights Reserved.
         </footer>
-        
     </div>
 
     @livewireScripts

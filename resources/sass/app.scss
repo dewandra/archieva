@@ -1,45 +1,246 @@
-// Fonts
+// 1. IMPORT FONTS
 @import url('https://fonts.bunny.net/css?family=Nunito');
-// @use url('https://fonts.bunny.net/css?family=Nunito');
-
-// Variables
-@import 'variables';
-
-@import'sweetalert2/src/sweetalert2.scss';
-
-// Bootstrap
-@import 'bootstrap/scss/bootstrap';
-
-@import 'bootstrap-icons/font/bootstrap-icons.css';
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
+// 2. IMPORT VARIABLES (warna UM sudah didefinisikan di sini)
+@import 'variables';
 
-.bg-my-primary{
-    background: #2A4C67 !important;
-}
-.btn-primary{
-    background: #2A4C67 !important;
-    border-color: #2A4C67 !important;
-}
-.bg-my-danger{
-    background: #d63e38  !important;
-}
-.bg-my-info{
-    background: #d6dde2 !important;
+// 3. IMPORT BOOTSTRAP & DEPENDENCIES
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'sweetalert2/src/sweetalert2.scss';
+
+// ============================================
+// 4. CUSTOM UTILITY CLASSES - WARNA UM
+// ============================================
+// Background colors
+.bg-um-primary {
+    background-color: $um-primary-blue !important;
 }
 
-// Variabel warna baru untuk aksen
-$teal: #20c997;
-$indigo: #6610f2;
+.bg-um-yellow {
+    background-color: $um-yellow !important;
+}
 
-// Membuat card utama terlihat lebih bersih
+.bg-um-green {
+    background-color: $um-green !important;
+}
+
+// Text colors
+.text-um-primary {
+    color: $um-primary-blue !important;
+}
+
+.text-um-yellow {
+    color: $um-yellow !important;
+}
+
+.text-um-green {
+    color: $um-green !important;
+}
+
+// Border colors
+.border-um-primary {
+    border-color: $um-primary-blue !important;
+}
+
+.border-um-yellow {
+    border-color: $um-yellow !important;
+}
+
+.border-um-green {
+    border-color: $um-green !important;
+}
+
+// Button variants
+.btn-um-primary {
+    background-color: $um-primary-blue !important;
+    border-color: $um-primary-blue !important;
+    color: #fff !important;
+    
+    &:hover {
+        background-color: darken($um-primary-blue, 10%) !important;
+        border-color: darken($um-primary-blue, 10%) !important;
+    }
+}
+
+.btn-um-yellow {
+    background-color: $um-yellow !important;
+    border-color: $um-yellow !important;
+    color: #000 !important;
+    
+    &:hover {
+        background-color: darken($um-yellow, 10%) !important;
+        border-color: darken($um-yellow, 10%) !important;
+    }
+}
+
+.btn-um-green {
+    background-color: $um-green !important;
+    border-color: $um-green !important;
+    color: #000 !important;
+    
+    &:hover {
+        background-color: darken($um-green, 10%) !important;
+        border-color: darken($um-green, 10%) !important;
+    }
+}
+
+// Legacy support (backward compatibility)
+.bg-my-primary {
+    background-color: $um-primary-blue !important;
+}
+
+.bg-my-danger {
+    background-color: #d63e38 !important;
+}
+
+.bg-my-info {
+    background-color: #d6dde2 !important;
+}
+
+// ============================================
+// 5. GLOBAL STYLES
+// ============================================
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FA;
+    color: #333;
+}
+
 .card {
-    border: none; // Menghilangkan border standar
-    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important; // Shadow lebih halus
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
 }
 
-// Style untuk card statistik yang baru
+// ============================================
+// 6. COMPONENT STYLES
+// ============================================
+
+// Stat Card
+.stat-card-icon {
+    width: 60px;
+    height: 60px;
+    display: flex;// 1. IMPORT FONTS
+@import url('https://fonts.bunny.net/css?family=Nunito');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+// 2. IMPORT VARIABLES (warna UM sudah didefinisikan di sini)
+@import 'variables';
+
+// 3. IMPORT BOOTSTRAP & DEPENDENCIES
+@import 'bootstrap/scss/bootstrap';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+@import 'sweetalert2/src/sweetalert2.scss';
+
+// ============================================
+// 4. CUSTOM UTILITY CLASSES - WARNA UM
+// ============================================
+// Background colors
+.bg-um-primary {
+    background-color: $um-primary-blue !important;
+}
+
+.bg-um-yellow {
+    background-color: $um-yellow !important;
+}
+
+.bg-um-green {
+    background-color: $um-green !important;
+}
+
+// Text colors
+.text-um-primary {
+    color: $um-primary-blue !important;
+}
+
+.text-um-yellow {
+    color: $um-yellow !important;
+}
+
+.text-um-green {
+    color: $um-green !important;
+}
+
+// Border colors
+.border-um-primary {
+    border-color: $um-primary-blue !important;
+}
+
+.border-um-yellow {
+    border-color: $um-yellow !important;
+}
+
+.border-um-green {
+    border-color: $um-green !important;
+}
+
+// Button variants
+.btn-um-primary {
+    background-color: $um-primary-blue !important;
+    border-color: $um-primary-blue !important;
+    color: #fff !important;
+    
+    &:hover {
+        background-color: darken($um-primary-blue, 10%) !important;
+        border-color: darken($um-primary-blue, 10%) !important;
+    }
+}
+
+.btn-um-yellow {
+    background-color: $um-yellow !important;
+    border-color: $um-yellow !important;
+    color: #000 !important;
+    
+    &:hover {
+        background-color: darken($um-yellow, 10%) !important;
+        border-color: darken($um-yellow, 10%) !important;
+    }
+}
+
+.btn-um-green {
+    background-color: $um-green !important;
+    border-color: $um-green !important;
+    color: #000 !important;
+    
+    &:hover {
+        background-color: darken($um-green, 10%) !important;
+        border-color: darken($um-green, 10%) !important;
+    }
+}
+
+// Legacy support (backward compatibility)
+.bg-my-primary {
+    background-color: $um-primary-blue !important;
+}
+
+.bg-my-danger {
+    background-color: #d63e38 !important;
+}
+
+.bg-my-info {
+    background-color: #d6dde2 !important;
+}
+
+// ============================================
+// 5. GLOBAL STYLES
+// ============================================
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F8F9FA;
+    color: #333;
+}
+
+.card {
+    border: none;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.05) !important;
+}
+
+// ============================================
+// 6. COMPONENT STYLES
+// ============================================
+
+// Stat Card
 .stat-card-icon {
     width: 60px;
     height: 60px;
@@ -50,14 +251,14 @@ $indigo: #6610f2;
     font-size: 1.75rem;
 }
 
-// Style untuk daftar surat yang lebih menarik
+// Letter List
 .letter-list .list-group-item {
     transition: background-color 0.2s ease-in-out;
     padding: 1rem 1.25rem !important;
-}
-
-.letter-list .list-group-item:hover {
-    background-color: #f8f9fa; // Warna hover yang lembut
+    
+    &:hover {
+        background-color: #f8f9fa;
+    }
 }
 
 .letter-list .item-icon {
@@ -66,21 +267,16 @@ $indigo: #6610f2;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-radius: 0.5rem;
+    border-radius: 50%; // Ini akan membuat lingkaran sempurna
     font-size: 1.2rem;
 }
 
-
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #F8F9FA;
-    color: #333;
-}
-
-/* === Sidebar Styling KHUSUS untuk DESKTOP === */
+// ============================================
+// 7. SIDEBAR STYLES
+// ============================================
 .sidebar-desktop {
     width: 280px;
-    background-color: #123654;
+    background-color: $um-primary-blue;
     color: #fff;
     position: fixed;
     top: 0;
@@ -90,11 +286,30 @@ body {
     overflow-y: auto;
 }
 
-/* Mendorong konten ke kanan HANYA di layar desktop */
-@media (min-width: 992px) {
-    .main-content-wrapper {
-        margin-left: 280px;
-    }
+.sidebar-mobile {
+    background-color: $um-primary-blue !important;
+    color: #fff;
+}
+
+// Watermark Logo UM
+.sidebar-watermark-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+// Pastikan konten sidebar di atas watermark
+.sidebar-desktop > *:not(.sidebar-watermark-bg),
+.sidebar-mobile .offcanvas-body > * {
+    position: relative;
+    z-index: 1;
 }
 
 .sidebar-header .sidebar-brand img {
@@ -110,28 +325,151 @@ body {
     text-decoration: none;
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
     margin-bottom: 0.25rem;
-}
-
-.sidebar-nav .nav-link i {
-    font-size: 1.2rem;
-    margin-right: 1rem;
-    width: 20px;
-    text-align: center;
-}
-
-.sidebar-nav .nav-link:hover {
-    background-color: #2A4C67;
-    color: #fff;
-}
-
-.sidebar-nav .nav-link.active {
-    background-color: #2A4C67 !important;
-    color: #fff !important;
-    font-weight: 500;
+    
+    i {
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+        color: #fff;
+    }
+    
+    &.active {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        color: #fff !important;
+        font-weight: 500;
+    }
 }
 
 .sidebar-divider {
     margin: 1rem 0;
     width: 100%;
     border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+// ============================================
+// 8. RESPONSIVE LAYOUT
+// ============================================
+@media (min-width: 992px) {
+    .main-content-wrapper {
+        margin-left: 280px;
+    }
+}
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 1.75rem;
+}
+
+// Letter List
+.letter-list .list-group-item {
+    transition: background-color 0.2s ease-in-out;
+    padding: 1rem 1.25rem !important;
+    
+    &:hover {
+        background-color: #f8f9fa;
+    }
+}
+
+.letter-list .item-icon {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+}
+
+// ============================================
+// 7. SIDEBAR STYLES
+// ============================================
+.sidebar-desktop {
+    width: 280px;
+    background-color: $um-primary-blue;
+    color: #fff;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    z-index: 1040;
+    overflow-y: auto;
+}
+
+.sidebar-mobile {
+    background-color: $um-primary-blue !important;
+    color: #fff;
+}
+
+// Watermark Logo UM
+.sidebar-watermark-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 200px;
+    height: 200px;
+    opacity: 0.08;
+    z-index: 0;
+    pointer-events: none;
+    object-fit: contain;
+}
+
+// Pastikan konten sidebar di atas watermark
+.sidebar-desktop > *:not(.sidebar-watermark-bg),
+.sidebar-mobile .offcanvas-body > * {
+    position: relative;
+    z-index: 1;
+}
+
+.sidebar-header .sidebar-brand img {
+    max-height: 40px;
+}
+
+.sidebar-nav .nav-link {
+    display: flex;
+    align-items: center;
+    color: #adb5bd;
+    padding: 0.8rem 1rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+    margin-bottom: 0.25rem;
+    
+    i {
+        font-size: 1.2rem;
+        margin-right: 1rem;
+        width: 20px;
+        text-align: center;
+    }
+    
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+        color: #fff;
+    }
+    
+    &.active {
+        background-color: rgba(0, 0, 0, 0.2) !important;
+        color: #fff !important;
+        font-weight: 500;
+    }
+}
+
+.sidebar-divider {
+    margin: 1rem 0;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+// ============================================
+// 8. RESPONSIVE LAYOUT
+// ============================================
+@media (min-width: 992px) {
+    .main-content-wrapper {
+        margin-left: 280px;
+    }
 }
